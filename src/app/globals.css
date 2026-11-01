@@ -1,0 +1,73 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ==========================================================================
+   PHÒNG KHÁM Y HỌC CỔ TRUYỀN KOKORO — PERMANENT ACCESSIBLE LIGHT THEME
+   Zero Dark Mode • High-Contrast WCAG AAA Legibility for Older Patients (40–75+)
+   ========================================================================== */
+
+:root {
+  color-scheme: light;
+
+  /* Exact Locked Kokoro Palette Tokens */
+  --kokoro-canvas: #FAFAF7;
+  --kokoro-surface: #FFFFFF;
+  --kokoro-border: #0D3B2E;
+  --kokoro-forest: #0D3B2E;
+  --kokoro-ink: #06231B;
+  --kokoro-gold: #B88219;
+  --kokoro-gold-hover: #C99224;
+}
+
+html {
+  color-scheme: light;
+  background-color: #FAFAF7;
+  color: #06231B;
+  font-size: 18px;
+  line-height: 1.7;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  background-color: var(--kokoro-canvas);
+  color: var(--kokoro-ink);
+  font-size: 1rem; /* >= 18px inherited from html */
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+/* WCAG AAA Keyboard Focus Ring (12.6:1 contrast on #FAFAF7) */
+:focus-visible {
+  outline: 3px solid #0D3B2E;
+  outline-offset: 3px;
+}
+
+/* High-contrast text selection */
+::selection {
+  background-color: #B88219;
+  color: #06231B;
+}
+
+/* Clean custom disclosure styling for zero-JS <details><summary> FAQ */
+summary::-webkit-details-marker {
+  display: none;
+}

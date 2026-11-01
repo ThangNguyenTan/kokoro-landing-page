@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import Image from 'next/image';
 
 export interface GalleryPhoto {
@@ -134,10 +134,12 @@ const FILTER_TABS = [
 ] as const;
 
 export function ClinicGallerySection() {
+  const sectionRef = useRef<HTMLElement>(null);
   const [activeTab, setActiveTab] = useState<string>('all');
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(3);
   const [isPaused, setIsPaused] = useState(false);
+  const [isInView, setIsInView] = useState(false);
   const [selectedPhoto, setSelectedPhoto] = useState<GalleryPhoto | null>(null);
 
   // Filter items based on active tab
@@ -163,6 +165,22 @@ export function ClinicGallerySection() {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Detect when customer scrolls to the gallery section
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   const maxIndex = Math.max(0, filteredPhotos.length - visibleCount);
 
   // Reset index when filter tab changes
@@ -186,16 +204,16 @@ export function ClinicGallerySection() {
     }
   }, [maxIndex, currentIndex]);
 
-  // Gentle auto-slide stepping 1 at a time every 8 seconds, paused on hover
+  // Gentle auto-slide stepping 1 at a time every 8 seconds, ONLY when in view and not paused
   useEffect(() => {
-    if (maxIndex <= 0 || isPaused || selectedPhoto !== null) return;
+    if (maxIndex <= 0 || isPaused || selectedPhoto !== null || !isInView) return;
 
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
     }, 8000);
 
     return () => clearInterval(interval);
-  }, [maxIndex, isPaused, selectedPhoto]);
+  }, [maxIndex, isPaused, selectedPhoto, isInView]);
 
   // Handle Escape key to close lightbox
   const handleKeyDown = useCallback(
@@ -222,6 +240,7 @@ export function ClinicGallerySection() {
 
   return (
     <section
+      ref={sectionRef}
       id="khong-gian"
       aria-labelledby="gallery-heading"
       className="scroll-mt-28 border-b border-[#0D3B2E] bg-[#FFFFFF] py-14 sm:py-20"

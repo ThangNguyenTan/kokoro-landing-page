@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import type { ClinicDoctor } from '@/types/clinic';
 
@@ -9,9 +9,11 @@ export interface DoctorsSectionProps {
 }
 
 export function DoctorsSection({ doctors }: DoctorsSectionProps) {
+  const sectionRef = useRef<HTMLElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(3);
   const [isPaused, setIsPaused] = useState(false);
+  const [isInView, setIsInView] = useState(false);
 
   // Responsive visible count
   useEffect(() => {
@@ -30,8 +32,25 @@ export function DoctorsSection({ doctors }: DoctorsSectionProps) {
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Detect when customer scrolls to the doctors section
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   const maxIndex = Math.max(0, doctors.length - visibleCount);
 
+  // Step exactly 1 doctor at a time
   const prevSlide = () => {
     setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
   };
@@ -47,18 +66,19 @@ export function DoctorsSection({ doctors }: DoctorsSectionProps) {
     }
   }, [maxIndex, currentIndex]);
 
-  // Auto-slide stepping 1 doctor at a time every 12 seconds, pausing on hover
+  // Auto-slide stepping 1 doctor at a time every 12 seconds, ONLY when in view and not paused
   useEffect(() => {
-    if (maxIndex <= 0 || isPaused) return;
+    if (maxIndex <= 0 || isPaused || !isInView) return;
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
     }, 12000);
 
     return () => clearInterval(interval);
-  }, [maxIndex, isPaused]);
+  }, [maxIndex, isPaused, isInView]);
 
   return (
     <section
+      ref={sectionRef}
       id="bac-si"
       aria-labelledby="doctors-heading"
       className="scroll-mt-28 border-b border-[#0D3B2E] bg-[#FAFAF7] py-14 sm:py-20"

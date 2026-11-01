@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import type { ClinicService } from '@/types/clinic';
 
 export interface ServicesGridProps {
@@ -122,9 +122,11 @@ function ServiceTherapyIcon({ iconName }: { iconName: string }) {
 }
 
 export function ServicesGrid({ services }: ServicesGridProps) {
+  const sectionRef = useRef<HTMLElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [visibleCount, setVisibleCount] = useState(3);
+  const [visibleCount, setVisibleCount] = useState(2);
   const [isPaused, setIsPaused] = useState(false);
+  const [isInView, setIsInView] = useState(false);
 
   // Responsive visible count: 2 items on desktop & tablet for extra width, 1 on mobile
   useEffect(() => {
@@ -139,6 +141,22 @@ export function ServicesGrid({ services }: ServicesGridProps) {
     handleResize();
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
+  }, []);
+
+  // Detect when customer scrolls to the section
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
   }, []);
 
   const maxIndex = Math.max(0, services.length - visibleCount);
@@ -159,18 +177,19 @@ export function ServicesGrid({ services }: ServicesGridProps) {
     }
   }, [maxIndex, currentIndex]);
 
-  // Auto-slide stepping 1 item at a time every 8 seconds, pausing on hover
+  // Auto-slide stepping 1 item at a time every 8 seconds, ONLY when customer has scrolled to this section
   useEffect(() => {
-    if (maxIndex <= 0 || isPaused) return;
+    if (maxIndex <= 0 || isPaused || !isInView) return;
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
     }, 8000);
 
     return () => clearInterval(interval);
-  }, [maxIndex, isPaused]);
+  }, [maxIndex, isPaused, isInView]);
 
   return (
     <section
+      ref={sectionRef}
       id="dich-vu"
       aria-labelledby="services-heading"
       className="scroll-mt-28 border-b border-[#0D3B2E] bg-[#FAFAF7] py-14 sm:py-20"

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import type { ClinicTestimonial } from '@/types/clinic';
 
@@ -9,9 +9,11 @@ export interface TestimonialsSectionProps {
 }
 
 export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) {
+  const sectionRef = useRef<HTMLElement>(null);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [visibleCount, setVisibleCount] = useState(2);
   const [isPaused, setIsPaused] = useState(false);
+  const [isInView, setIsInView] = useState(false);
 
   // Responsive visible count: 2 on desktop/tablet, 1 on mobile
   useEffect(() => {
@@ -28,8 +30,25 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
 
+  // Detect when customer scrolls to the testimonials section
+  useEffect(() => {
+    const el = sectionRef.current;
+    if (!el) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setIsInView(entry.isIntersecting);
+      },
+      { threshold: 0.15 }
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, []);
+
   const maxIndex = Math.max(0, testimonials.length - visibleCount);
 
+  // Step exactly 1 item at a time
   const prevSlide = () => {
     setCurrentIndex((prev) => (prev <= 0 ? maxIndex : prev - 1));
   };
@@ -45,18 +64,19 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
     }
   }, [maxIndex, currentIndex]);
 
-  // Auto-slide stepping 1 item at a time every 10 seconds, pausing on hover
+  // Auto-slide stepping 1 item at a time every 10 seconds, ONLY when in view and not paused
   useEffect(() => {
-    if (maxIndex <= 0 || isPaused) return;
+    if (maxIndex <= 0 || isPaused || !isInView) return;
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
     }, 10000);
 
     return () => clearInterval(interval);
-  }, [maxIndex, isPaused]);
+  }, [maxIndex, isPaused, isInView]);
 
   return (
     <section
+      ref={sectionRef}
       id="cam-nhan"
       aria-labelledby="testimonials-heading"
       className="scroll-mt-28 border-b border-[#0D3B2E] bg-[#FAFAF7] py-14 sm:py-20"

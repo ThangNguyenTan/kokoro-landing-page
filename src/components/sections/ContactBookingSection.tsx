@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import type { ClinicSettings } from '@/types/clinic';
 import { MapFacade } from './MapFacade';
 
@@ -72,22 +71,6 @@ export function ContactBookingSection({
                   <p className="mt-0.5 text-[#06231B]">
                     Mặt tiền rộng rãi, đậu được xe ô tô ngay trước cửa phòng khám. Nhân viên hỗ trợ mở cửa và đón cô chú vào phòng khám.
                   </p>
-                </div>
-
-                {/* Real Facade Image for Instant Recognition */}
-                <div className="relative mt-4 aspect-[16/9] w-full overflow-hidden border-2 border-[#0D3B2E]">
-                  <Image
-                    src="/images/gallery/exterior-2.webp"
-                    alt="Mặt tiền thực tế Phòng Khám YHCT Kokoro - Số 13 Đường số 15A"
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 40vw"
-                    className="object-cover"
-                  />
-                  <div className="absolute bottom-2 left-2">
-                    <span className="border border-[#0D3B2E] bg-[#0D3B2E]/90 px-2.5 py-1 text-[13px] font-bold text-[#FFFFFF] backdrop-blur-sm">
-                      Mặt tiền thực tế • Có chỗ đậu ô tô
-                    </span>
-                  </div>
                 </div>
               </div>
             </div>

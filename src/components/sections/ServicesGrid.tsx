@@ -21,11 +21,13 @@ function ServiceTherapyIcon({ iconName }: { iconName: string }) {
           strokeLinejoin="round"
           className="h-7 w-7"
         >
-          <path d="m18 2 4 4" />
-          <path d="m17 7 3-3" />
-          <path d="M19 9 6.5 21.5" />
-          <circle cx="6.5" cy="17.5" r="2.5" />
-          <path d="M3 21h4" />
+          {/* Kim châm cứu y tế với chuôi kim xoắn (Acupuncture needle with coiled handle) */}
+          <path d="M12 2v5" strokeWidth="2.5" />
+          <path d="M10 3.5h4" strokeWidth="1.5" />
+          <path d="M10 5.5h4" strokeWidth="1.5" />
+          <path d="M12 7v14" strokeWidth="1.5" />
+          {/* Sóng xung điện tần số sinh học giảm đau (Electro-acupuncture frequency pulse) */}
+          <path d="M3 15h4l2-4 3 8 2-5 2 2h5" strokeWidth="1.8" />
         </svg>
       );
     case 'acupressure':

@@ -233,7 +233,7 @@ export function DoctorsSection({ doctors }: DoctorsSectionProps) {
 
         {/* Carousel Pagination Dots */}
         {maxIndex > 0 && (
-          <div className="mt-8 flex items-center justify-center gap-3">
+          <div className="mt-8 flex justify-center gap-2">
             {Array.from({ length: maxIndex + 1 }).map((_, index) => (
               <button
                 key={index}
@@ -241,10 +241,10 @@ export function DoctorsSection({ doctors }: DoctorsSectionProps) {
                 onClick={() => setCurrentIndex(index)}
                 aria-label={`Chuyển đến bác sĩ ${index + 1}`}
                 aria-current={currentIndex === index ? 'true' : 'false'}
-                className={`h-3.5 transition-all ${
+                className={`h-3 rounded-full transition-all ${
                   currentIndex === index
-                    ? 'w-10 bg-[#0D3B2E]'
-                    : 'w-3.5 border-2 border-[#0D3B2E] bg-[#FFFFFF] hover:bg-[#0D3B2E]/40'
+                    ? 'w-8 bg-[#0D3B2E]'
+                    : 'w-3 bg-[#0D3B2E]/30 hover:bg-[#0D3B2E]/60'
                 }`}
               />
             ))}

@@ -15,44 +15,54 @@ export interface GalleryPhoto {
 
 const GALLERY_PHOTOS: GalleryPhoto[] = [
   {
+    id: 'exterior-entrance',
+    title: 'Biển Hiệu & Lối Vào An Toàn Cho Người Cao Tuổi',
+    category: 'exterior',
+    categoryLabel: 'Mặt Tiền & Lối Vào',
+    description:
+      'Biển hiệu nhận diện rõ ràng, lối vào bằng phẳng không bậc tam cấp cao, cực kỳ an toàn và thuận tiện cho người lớn tuổi.',
+    src: '/images/gallery/exterior-1.webp',
+    alt: 'Lối vào an toàn cho người cao tuổi tại Phòng Khám Kokoro',
+  },
+  {
     id: 'exterior-main',
     title: 'Mặt Tiền Phòng Khám YHCT Kokoro',
     category: 'exterior',
     categoryLabel: 'Mặt Tiền & Lối Vào',
     description:
-      'Số 13 Đường số 15A, P. An Lạc (Khu Tên Lửa). Đường rộng rãi, bằng phẳng, ô tô và taxi đậu ngay trước cửa phòng khám.',
+      'Số 13 Đường số 15A, P. An Lạc (Khu Tên Lửa). Đường nội khu rộng thoáng, ô tô và taxi đưa đón người bệnh đậu ngay trước cửa.',
     src: '/images/gallery/exterior-2.webp',
     alt: 'Mặt tiền thực tế Phòng Khám Y Học Cổ Truyền Kokoro Bình Tân',
   },
   {
-    id: 'treatment-acupuncture-room',
-    title: 'Phòng Trị Liệu Châm Cứu & Bấm Huyệt',
-    category: 'treatment',
-    categoryLabel: 'Phòng Trị Liệu',
+    id: 'reception-pharmacy',
+    title: 'Quầy Tiếp Tân & Phân Chia Dược Liệu Bốc Thuốc',
+    category: 'pharmacy',
+    categoryLabel: 'Tiếp Tân & Quầy Thuốc',
     description:
-      'Giường trị liệu y khoa êm ái, rèm che ngăn cách riêng tư, ga trải sạch sẽ vô trùng được thay mới cho từng bệnh nhân.',
+      'Khu vực tiếp đón bệnh nhân kết hợp bàn bốc thuốc, phân chia và đóng gói thang thuốc Đông y chuẩn sạch theo đơn Bác sĩ.',
     src: '/images/gallery/interior-2.webp',
-    alt: 'Phòng trị liệu châm cứu bấm huyệt tại Kokoro',
+    alt: 'Quầy tiếp tân và phân chia bốc thuốc thang Đông y tại Kokoro',
   },
   {
-    id: 'reception-lobby',
-    title: 'Không Gian Tiếp Đón & Chờ Khám Ấm Cúng',
+    id: 'treatment-room-1',
+    title: 'Phòng Điều Trị & Trị Liệu Y Học Cổ Truyền',
     category: 'treatment',
-    categoryLabel: 'Khu Vực Tiếp Đón',
+    categoryLabel: 'Phòng Điều Trị',
     description:
-      'Không gian thoáng mát, thanh tịnh với tông màu gỗ ấm cúng, phục vụ trà thảo mộc ấm giúp cô chú thư thái tinh thần.',
+      'Không gian phòng điều trị khang trang, trang bị giường trị liệu êm ái, rèm ngăn riêng tư và dụng cụ châm cứu vô trùng.',
     src: '/images/gallery/interior-1.webp',
-    alt: 'Khu vực tiếp đón bệnh nhân tại Phòng Khám YHCT Kokoro',
+    alt: 'Phòng điều trị y học cổ truyền tại Phòng Khám Kokoro',
   },
   {
-    id: 'doctor-consultation',
-    title: 'Khu Bắt Mạch Tứ Chẩn & Thăm Khám Chuyên Khoa',
+    id: 'treatment-room-2',
+    title: 'Phòng Điều Trị Châm Cứu & Bấm Huyệt Chuyên Sâu',
     category: 'treatment',
-    categoryLabel: 'Phòng Bác Sĩ',
+    categoryLabel: 'Phòng Điều Trị',
     description:
-      'Nơi Bác sĩ chuyên khoa trực tiếp lắng nghe cặn kẽ, bắt mạch tứ chẩn và giải thích nguyên nhân bệnh lý bằng ngôn ngữ gần gũi.',
+      'Khu vực điều trị thoáng đãng, yên tĩnh, đảm bảo quy chuẩn vô khuẩn chuẩn mực của Sở Y Tế dành cho người lớn tuổi.',
     src: '/images/gallery/interior-3.webp',
-    alt: 'Bàn bắt mạch chẩn đoán y học cổ truyền tại Kokoro',
+    alt: 'Phòng điều trị châm cứu bấm huyệt tại Kokoro',
   },
   {
     id: 'herbal-pharmacy-cabinet',
@@ -78,7 +88,7 @@ const GALLERY_PHOTOS: GalleryPhoto[] = [
     id: 'physio-rehab-station',
     title: 'Giường Điện Châm & Phục Hồi Vận Động',
     category: 'treatment',
-    categoryLabel: 'Phòng Trị Liệu',
+    categoryLabel: 'Phòng Điều Trị',
     description:
       'Trang bị máy điện châm tần số sinh học, đèn hồng ngoại ôn thông kinh lạc an toàn cho người cao tuổi đau nhức cột sống.',
     src: '/images/gallery/interior-6.webp',
@@ -98,7 +108,7 @@ const GALLERY_PHOTOS: GalleryPhoto[] = [
     id: 'clean-supplies',
     title: 'Dụng Cụ Vô Trùng Chuẩn Y Khoa',
     category: 'treatment',
-    categoryLabel: 'Phòng Trị Liệu',
+    categoryLabel: 'Phòng Điều Trị',
     description:
       '100% kim châm cứu dùng một lần đóng vỉ vô trùng, cồn sát khuẩn chuẩn Bộ Y Tế, tuyệt đối bảo đảm an toàn chống lây nhiễm.',
     src: '/images/gallery/interior-8.webp',
@@ -114,23 +124,13 @@ const GALLERY_PHOTOS: GalleryPhoto[] = [
     src: '/images/gallery/interior-9.webp',
     alt: 'Không gian phòng khám thanh tịnh thoáng mát',
   },
-  {
-    id: 'exterior-entrance',
-    title: 'Biển Hiệu & Lối Vào An Toàn Cho Người Cao Tuổi',
-    category: 'exterior',
-    categoryLabel: 'Mặt Tiền & Lối Vào',
-    description:
-      'Biển hiệu nhận diện rõ ràng, lối vào không bậc tam cấp nguy hiểm, nhân viên tận tâm hỗ trợ cô chú di chuyển.',
-    src: '/images/gallery/exterior-1.webp',
-    alt: 'Lối vào an toàn cho người cao tuổi tại Kokoro Clinic',
-  },
 ];
 
 const FILTER_TABS = [
   { key: 'all', label: 'Tất Cả (11)' },
-  { key: 'treatment', label: 'Phòng Trị Liệu & Khám (7)' },
-  { key: 'pharmacy', label: 'Nhà Thuốc Đông Y (2)' },
   { key: 'exterior', label: 'Mặt Tiền & Lối Vào (2)' },
+  { key: 'treatment', label: 'Phòng Điều Trị (6)' },
+  { key: 'pharmacy', label: 'Tiếp Tân & Quầy Thuốc (3)' },
 ] as const;
 
 export function ClinicGallerySection() {

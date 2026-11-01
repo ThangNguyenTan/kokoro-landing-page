@@ -1,4 +1,4 @@
-﻿import sharp from 'sharp';
+import sharp from 'sharp';
 import fs from 'fs';
 import path from 'path';
 
@@ -105,6 +105,13 @@ async function createPatientImage(filename, initials, gender = 'female', bgHue =
 await createDoctorImage('dr-tran-minh-hoa.webp', 'BS.CKI Trần Minh Hòa', 'Bác sĩ CKI YHCT', 'Cơ Xương Khớp & Cột Sống', 'MH');
 await createDoctorImage('dr-nguyen-thanh-thao.webp', 'BS. Nguyễn Thanh Thảo', 'Bác sĩ YHCT', 'Châm Cứu & Phục Hồi', 'TT');
 await createDoctorImage('dr-le-quoc-bao.webp', 'Lương Y Lê Quốc Bảo', 'Y sĩ YHCT', 'Xoa Bóp Bấm Huyệt', 'QB');
+await createDoctorImage('dr-dang-hoang-nam.webp', 'ThS.BS Đặng Hoàng Nam', 'Thạc sĩ YHCT', 'Thoái Hóa Cột Sống', 'HN');
+await createDoctorImage('dr-vu-thi-mai-phuong.webp', 'BS.CKI Vũ Thị Mai Phương', 'Bác sĩ CKI YHCT', 'Nội Khoa Đông Y & Tiền Đình', 'MP');
+await createDoctorImage('dr-pham-duc-trong.webp', 'BS. Phạm Đức Trọng', 'Bác sĩ YHCT', 'Điện Châm & Thủy Châm', 'ĐT');
+await createDoctorImage('dr-bui-hoang-long.webp', 'BS.CKI Bùi Hoàng Long', 'Bác sĩ CKI YHCT', 'Phục Hồi Chức Năng Vận Động', 'HL');
+await createDoctorImage('dr-hoang-thi-thu-trang.webp', 'Lương Y Hoàng Thị Thu Trang', 'Y sĩ YHCT', 'Dược Liệu & Thuốc Thang', 'TT');
+await createDoctorImage('dr-do-quoc-huy.webp', 'BS. Đỗ Quốc Huy', 'Bác sĩ YHCT', 'Cứu Ngải & Khớp Gối Mạn Tính', 'QH');
+await createDoctorImage('dr-ngo-thanh-tung.webp', 'BS.CKI Ngô Thanh Tùng', 'Bác sĩ CKI YHCT', 'Lão Khoa & Bắt Mạch Tứ Chẩn', 'NT');
 
 await createPatientImage('patient-co-lan.webp', 'NL', 'female');
 await createPatientImage('patient-chu-hung.webp', 'TH', 'male');

@@ -66,12 +66,12 @@ export function DoctorsSection({ doctors }: DoctorsSectionProps) {
     }
   }, [maxIndex, currentIndex]);
 
-  // Auto-slide stepping 1 doctor at a time every 20 seconds, ONLY when in view and not paused
+  // Auto-slide stepping 1 doctor at a time every 10 seconds, ONLY when in view and not paused (stops on hover/focus)
   useEffect(() => {
     if (maxIndex <= 0 || isPaused || !isInView) return;
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-    }, 20000);
+    }, 10000);
 
     return () => clearInterval(interval);
   }, [maxIndex, isPaused, isInView]);
@@ -84,6 +84,8 @@ export function DoctorsSection({ doctors }: DoctorsSectionProps) {
       className="scroll-mt-28 border-b border-[#0D3B2E] bg-[#FAFAF7] py-14 sm:py-20"
       onMouseEnter={() => setIsPaused(true)}
       onMouseLeave={() => setIsPaused(false)}
+      onFocusCapture={() => setIsPaused(true)}
+      onBlurCapture={() => setIsPaused(false)}
     >
       <div className="mx-auto max-w-[1500px] px-4 sm:px-6 lg:px-8">
         {/* Section Header with Carousel Controls */}

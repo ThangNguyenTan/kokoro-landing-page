@@ -204,13 +204,13 @@ export function ClinicGallerySection() {
     }
   }, [maxIndex, currentIndex]);
 
-  // Gentle auto-slide stepping 1 at a time every 8 seconds, ONLY when in view and not paused
+  // Gentle auto-slide stepping 1 at a time every 20 seconds, ONLY when in view and not paused
   useEffect(() => {
     if (maxIndex <= 0 || isPaused || selectedPhoto !== null || !isInView) return;
 
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-    }, 8000);
+    }, 20000);
 
     return () => clearInterval(interval);
   }, [maxIndex, isPaused, selectedPhoto, isInView]);

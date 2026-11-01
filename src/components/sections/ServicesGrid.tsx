@@ -177,12 +177,12 @@ export function ServicesGrid({ services }: ServicesGridProps) {
     }
   }, [maxIndex, currentIndex]);
 
-  // Auto-slide stepping 1 item at a time every 8 seconds, ONLY when customer has scrolled to this section
+  // Auto-slide stepping 1 item at a time every 20 seconds, ONLY when customer has scrolled to this section
   useEffect(() => {
     if (maxIndex <= 0 || isPaused || !isInView) return;
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-    }, 8000);
+    }, 20000);
 
     return () => clearInterval(interval);
   }, [maxIndex, isPaused, isInView]);

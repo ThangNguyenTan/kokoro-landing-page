@@ -64,12 +64,12 @@ export function TestimonialsSection({ testimonials }: TestimonialsSectionProps) 
     }
   }, [maxIndex, currentIndex]);
 
-  // Auto-slide stepping 1 item at a time every 10 seconds, ONLY when in view and not paused
+  // Auto-slide stepping 1 item at a time every 20 seconds, ONLY when in view and not paused
   useEffect(() => {
     if (maxIndex <= 0 || isPaused || !isInView) return;
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1));
-    }, 10000);
+    }, 20000);
 
     return () => clearInterval(interval);
   }, [maxIndex, isPaused, isInView]);
